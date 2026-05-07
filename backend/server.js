@@ -12,3 +12,7 @@ let posts = [];
 app.get("/", (req, res) => {
     res.send("Correct server.js is running");
 });
+
+app.listen(PORT, () => {
+    console.log(`Sever is running on http://localhost:${PORT}`);
+});
