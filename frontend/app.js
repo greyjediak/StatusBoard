@@ -74,10 +74,67 @@ function StatusBoard() {
                 <section className="form-panel">
                     <h2>Post Your Status</h2>
                     <form onSubmit={handleSubmit}>
+
                         <label>Title</label>
                         <input value={title} onChange={(e) =>setTitle(e.target.value)} placeholder="Title of Staus Here" required />
+                        
+                    
+                        <label>Message</label>
+                        <input value={msg} onChange={(e) =>setTitle(e.target.value)} placeholder="Enter description here" required />
+                        
+                        <label>Severity</label>
+                        <p>Choose a severity class</p>
+                        <div className="radio-row">
+                            {Object.entries(SEVERITY_LABEL).map(([key, value]) => (
+                            <button
+                                key={key}
+                                type="button"
+                                data-severity={key}
+                                className={severity === key ? "choice selected" : "choice"}
+                                onClick={() => setSeverity(key)}
+                            >
+                                <span className="shape">{value.icon}</span>
+                                {value.label}
+                            </button>
+                        ))}
+                        </div>
+                        {error && <p className="form-error">{error}</p>}
+                        <button className="submit-btn" type="submit" disabled={loading}>
+                            {loading ? "Posting....." : "Post Status"}
+                        </button>
+
                     </form>
                 </section>
+
+                <section className="feed-panel">
+                    <h2>Status Feed</h2>
+
+                    {statuses.length === 0 ? (
+                        <p className="empty">Post a status to see it appear in the feed.</p>
+                    ) : (
+                        statuses.map((status) => (
+                            <article className="sticky-note" key={status.id} data-severity={status.severity}>
+                                <div className="feed-header">
+                                    <h3>{status.title}</h3>
+                                    <span>
+                                        {new Date(status.createdAt).toLocaleString([], {
+                                            month: "short",
+                                            day: "numeric",
+                                            hour: "2-digit",
+                                            minute: "2-digit"
+                                        })}
+                                    </span>
+                                </div>
+                                <p className="feed-message">{status.msg}</p>
+                                <span className="tag" data-severity={status.severity}>
+                                    {SEVERITY_LABEL[status.severity].icon} {SEVERITY_LABEL[status.severity].label}
+                                </span>
+                            </article>
+                        ))
+                    )}
+                </section>
+
+
             </main>
         </div>
 
