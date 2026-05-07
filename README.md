@@ -14,6 +14,6 @@ http://localhost:4000
 
 ## Frontend Setup
 
-Open frontend/index.html with Live Server.
+Open frontend/index.html with Live Server in VSCode.
 
 The frontend will open in your browser and connect to the backend API automatically.

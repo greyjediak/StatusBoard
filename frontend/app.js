@@ -89,7 +89,7 @@ function StatusBoard() {
                         
                     
                         <label>Message</label>
-                        <input value={msg} onChange={(e) =>setTitle(e.target.value)} placeholder="Enter description here" required />
+                        <input value={msg} onChange={(e) =>setMsg(e.target.value)} placeholder="Enter description here" required />
                         
                         <label>Severity</label>
                         <p>Choose a severity class</p>
