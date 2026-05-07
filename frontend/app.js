@@ -1,6 +1,8 @@
 // Main frontend app Lindsey B.
 // 5/7/2026
 
+const {useState, useEffect} = React; 
+
 const API_URL = "http://localhost:4000/api/statuses";
 const SEVERITY_LABEL = {
     low: { label: "Low", icon:"●"},
@@ -11,7 +13,7 @@ const SEVERITY_LABEL = {
     info: {label: "Info", icon: "ℹ"}
 }
 function StatusBoard() {
-    const [statuses, setStatuses] = useStatt([]); //stroes 
+    const [statuses, setStatuses] = useState([]); //stroes 
     const [title, setTitle] = useState(""); //stores input
     const [msg, setMsg] = useState(""); //input msg
     const [severity, setSeverity] = useState("low"); //request state
@@ -19,17 +21,24 @@ function StatusBoard() {
     const [error, setError] = useState("");
 
     useEffect(() => {
-        async function loadPosts() {
+        async function loadStatuses() {
             try {
-                setError("");
-                const response = await fetch(API_URL);
+            setError("");
+            const response = await fetch(API_URL);
+
+            if (!response.ok) {
+                throw new Error("Failed to load");
             }
-            catch (err){
+
+            const data = await response.json();
+            setStatuses(data);
+            } catch (err) {
                 setError("Could not load statuses. Check if backend running");
             }
         }
+
         loadStatuses();
-    })
+    }, []);
 
     async function handleSubmit(e) {
          e.preventDefault(); //keep page from reloading

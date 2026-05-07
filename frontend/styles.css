@@ -97,7 +97,7 @@ textarea {
 
 }
 .sticky-note:hover {
-    transfrom: rotate(0deg) scale(1.02);
+    transform: rotate(0deg) scale(1.02);
     box-shadow: 8px 10px 16px rgba(0,0,0, 0.18);
 }
 

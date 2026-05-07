@@ -15,7 +15,7 @@ app.get("/", (req, res) => {
 
 // GET
 app.get("/api/statuses", (req,res) => {
-    res.json(statuses);
+    res.json(posts);
 });
 
 // POST
@@ -32,7 +32,7 @@ app.post("/api/statuses", (req, res) => {
         severity,
         createdAt: new Date().toLocaleDateString()
     };
-    statuses.unshift(newPost);
+    posts.unshift(newPost);
     res.status(201).json(newPost);
 });
 
